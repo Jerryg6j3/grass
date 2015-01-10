@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Grass extends PApplet{
-	ArrayList<GrassBlade> grassArray;;
+	ArrayList<GrassBlade> grassArray;
 	private int width = 800;
 	private int height = 600;
 	private int grassNumber = 300;
@@ -17,6 +17,7 @@ public class Grass extends PApplet{
 		GrassBlade temp;
 		Random rand = new Random();
 		int minus = -1;
+		// instantiate grass blades
 		grassArray = new ArrayList<GrassBlade>();
 		for(int i=0;i<grassNumber;i++){
 			temp = new GrassBlade(this, rand.nextInt(width), 8f, rand.nextInt(20)*minus+100f, rand.nextInt(21)+1);
@@ -36,6 +37,7 @@ public class Grass extends PApplet{
 			x.paintOut();
 			x.swing();
 		}
+		// try to fill some gap
 		translate(10, -5);
 		for(GrassBlade x : grassArray){
 			x.paintOut();
@@ -64,15 +66,18 @@ public class Grass extends PApplet{
 			Random rand = new Random();
 			this.degreeRange = -degree/360.f*PI;
 			this.degree = degreeRange*rand.nextFloat();
+			// slightly randomize the green
 			color = new int[3];
 			color[0] = rand.nextInt(20)+0;
 			color[1] = rand.nextInt(10)*(rand.nextBoolean()?-1:1)+128;
 			color[2] = rand.nextInt(20)+0;
 		}
 		void paintOut(){
+			// draw the grass blade as three parts composing together
 			pushMatrix();
 			fill(color[0],color[1],color[2]);
 			stroke(color[0],color[1],color[2]);
+			// first part
 			translate(leftBottom, parent.height);
 			beginShape();
 			vertex(0,0);
@@ -80,6 +85,7 @@ public class Grass extends PApplet{
 			vertex(slope.x+width/3*2, slope.y);
 			vertex(slope.x, slope.y);
 			endShape();
+			// second part
 			translate(slope.x, slope.y);
 			rotate(degree);
 			beginShape();
@@ -88,6 +94,7 @@ public class Grass extends PApplet{
 			vertex(slope.x+width/3, slope.y);
 			vertex(slope.x, slope.y);
 			endShape();
+			// thrid part
 			translate(slope.x, slope.y);
 			rotate(degree);
 			beginShape();
@@ -99,6 +106,7 @@ public class Grass extends PApplet{
 			popMatrix();
 		}
 		public void swing(){
+			// make it swing
 			if(degree<=degreeRange){
 				swingDir = 1;
 			}
