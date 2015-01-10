@@ -55,7 +55,7 @@ public class Grass extends PApplet{
 		private Grass parent;
 		private int swingDir;
 		private int [] color;
-		public GrassBlade(Grass parent, float leftBottom, float width, float height, int degree){
+		public GrassBlade(Grass parent, float leftBottom, float width, float height, int degreeRange){
 			this.parent = parent;
 			this.leftBottom = leftBottom;
 			this.height = height;
